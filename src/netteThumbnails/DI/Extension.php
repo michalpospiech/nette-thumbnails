@@ -5,11 +5,11 @@
  * @author Michal Pospiech <michal@pospiech.cz>
  */
 
-namespace Libs\NetProfit\Thumbnail\DI;
+namespace netteThumbnails\DI;
 
 
-use Libs\NetProfit\Thumbnail\Generator;
 use Nette\DI\CompilerExtension;
+use netteThumbnails\Generator;
 
 class Extension extends CompilerExtension
 {
