@@ -40,9 +40,9 @@ class Generator extends Object
 	private $placeholder;
 	
 	/** @var array */
-	private $options;
+	private $options = array();
 	
-	public function __construct(IRequest $httpRequest, $wwwDir, $thumbPathMask, $placeholder, $options = [])
+	public function __construct(IRequest $httpRequest, $wwwDir, $thumbPathMask, $placeholder, $options = array())
 	{
 		$this->wwwDir = $wwwDir;
 		$this->httpRequest = $httpRequest;
@@ -135,8 +135,8 @@ class Generator extends Object
 	private function createThumbPath()
 	{
 		$pathInfo = pathinfo($this->src);
-		$search = ['{width}', '{height}', '{filename}', '{extension}'];
-		$replace = [$this->width, $this->height, $pathInfo['filename'], $pathInfo['extension']];
+		$search = array('{width}', '{height}', '{filename}', '{extension}');
+		$replace = array($this->width, $this->height, $pathInfo['filename'], $pathInfo['extension']);
 		return str_replace($search, $replace, $this->thumbPathMask);
 	}
 
