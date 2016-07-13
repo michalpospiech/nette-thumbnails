@@ -1,0 +1,23 @@
+{
+  "name": "mpospiech/nette-thumbnails",
+  "description": "Create thumbnails from images",
+  "keywords": ["nette", "image", "thumbnail"],
+  "license": "Apache license",
+  "authors": [
+    {
+      "name": "Michal Pospiech",
+      "email": "michal@pospiech.cz"
+    }
+  ],
+  "autoload": {
+    "psr-0": {
+      "netteThumbnails": "src"
+    }
+  },
+  "require": {
+    "php": ">= 5.3.1",
+    "nette/utils": "^2.4",
+    "nette/http": "^2.4",
+    "nette/di": "^2.4"
+  }
+}
