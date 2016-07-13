@@ -86,7 +86,10 @@ class Generator extends Object
 	{
 		$rawImage = Image::fromFile($this->src);
 		$rawImage->resize($this->width, $this->height, Image::SHRINK_ONLY);
-		$rawImage->sharpen();
+
+		if ($this->getOption('sharpen', true)) {
+			$rawImage->sharpen();
+		}
 
 		if ($this->getOption('place', true)) {
 			$image = Image::fromBlank($this->width, $this->height, $this->getOption('background', Image::rgb(255, 255, 255, 127)));
