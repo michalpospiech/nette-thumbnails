@@ -5,7 +5,7 @@
  * @author Michal Pospiech <michal@pospiech.cz>
  */
 
-namespace NetteThumbnails;
+namespace Thumbnails;
 
 
 use Nette\Http\IRequest;
