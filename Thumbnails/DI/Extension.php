@@ -17,7 +17,7 @@ class Extension extends CompilerExtension
 	public $defaults = [
 		'wwwDir' => '%wwwDir%',
 		'httpRequest' => '@httpRequest',
-		'thumbPathMask' => 'images/thumbs/{width}x{height}/{filename}.{extension}',
+		'thumbPathMask' => 'images/thumbs/{subDir}{width}x{height}/{filename}.{extension}',
 		'placeholder' => 'http://fakeimg.pl/{width}x{height}/ffffff/000000?text=Image+not+found',
 		'helperName' => 'thumb',
 		'options' => []

@@ -29,6 +29,9 @@ class Generator extends Object
 	
 	/** @var int */
 	protected $height;
+
+	/** @var string */
+	protected $subDir;
 	
 	/** @var IRequest */
 	private $httpRequest;
@@ -55,16 +58,22 @@ class Generator extends Object
 	 * @param string $src
 	 * @param int $width
 	 * @param int $height
+	 * @param string|null $subDir
 	 * @return mixed|string
 	 */
-	public function generateThumbnail($src, $width, $height)
+	public function generateThumbnail($src, $width, $height, $subDir = null)
 	{
 		$this->src = $this->wwwDir . '/' . $src;
 		$this->width = $width;
 		$this->height = $height;
+		$this->subDir = $subDir;
 
 		if (!is_file($this->src)) {
 			return $this->createPlaceholderPath();
+		}
+
+		if ($this->subDir && !preg_match('~\/|\\$~', $this->subDir)) {
+			$this->subDir .= DIRECTORY_SEPARATOR;
 		}
 
 		$thumbPath = $this->createThumbPath();
@@ -138,8 +147,8 @@ class Generator extends Object
 	private function createThumbPath()
 	{
 		$pathInfo = pathinfo($this->src);
-		$search = array('{width}', '{height}', '{filename}', '{extension}');
-		$replace = array($this->width, $this->height, $pathInfo['filename'], $pathInfo['extension']);
+		$search = array('{subDir}', '{width}', '{height}', '{filename}', '{extension}');
+		$replace = array($this->subDir, $this->width, $this->height, $pathInfo['filename'], $pathInfo['extension']);
 		return str_replace($search, $replace, $this->thumbPathMask);
 	}
 
