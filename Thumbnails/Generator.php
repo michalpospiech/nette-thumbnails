@@ -8,13 +8,13 @@
 namespace Thumbnails;
 
 
-use Nette\Http\IRequest;
-use Nette\Object;
-use Nette\Utils\Image;
+use Nette;
 
-class Generator extends Object
+class Generator
 {
-	
+
+	use Nette\SmartObject;
+
 	/** @var string */
 	protected $wwwDir;
 
@@ -33,7 +33,7 @@ class Generator extends Object
 	/** @var string */
 	protected $subDir;
 	
-	/** @var IRequest */
+	/** @var Nette\Http\IRequest */
 	private $httpRequest;
 	
 	/** @var string */
@@ -45,7 +45,7 @@ class Generator extends Object
 	/** @var array */
 	private $options = array();
 	
-	public function __construct(IRequest $httpRequest, $wwwDir, $thumbPathMask, $placeholder, $options = array())
+	public function __construct(Nette\Http\IRequest $httpRequest, $wwwDir, $thumbPathMask, $placeholder, $options = array())
 	{
 		$this->wwwDir = $wwwDir;
 		$this->httpRequest = $httpRequest;
@@ -93,15 +93,15 @@ class Generator extends Object
 	 */
 	private function createThumb()
 	{
-		$rawImage = Image::fromFile($this->src);
-		$rawImage->resize($this->width, $this->height, Image::SHRINK_ONLY);
+		$rawImage = Nette\Utils\Image::fromFile($this->src);
+		$rawImage->resize($this->width, $this->height, Nette\Utils\Image::SHRINK_ONLY);
 
 		if ($this->getOption('sharpen', true)) {
 			$rawImage->sharpen();
 		}
 
 		if ($this->getOption('place', true)) {
-			$image = Image::fromBlank($this->width, $this->height, $this->getOption('background', Image::rgb(255, 255, 255, 127)));
+			$image = Nette\Utils\Image::fromBlank($this->width, $this->height, $this->getOption('background', Nette\Utils\Image::rgb(255, 255, 255, 127)));
 			$image->place($rawImage, $this->getOption('placeLeft', '50%'), $this->getOption('placeTop', '50%'), $this->getOption('opacity', 100));
 		} else {
 			$image = $rawImage;
